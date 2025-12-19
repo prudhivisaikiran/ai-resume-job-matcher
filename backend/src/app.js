@@ -13,7 +13,7 @@ app.use(cors({
     origin: [
         "http://localhost:5175",
         "http://localhost:5173",
-        // "https://YOUR_FRONTEND_URL.onrender.com" // Add after deploy
+        "https://6944ea73366ed1f31f3e7306--courageous-tarsier-ae47e9.netlify.app"
     ],
     credentials: true
 }));
