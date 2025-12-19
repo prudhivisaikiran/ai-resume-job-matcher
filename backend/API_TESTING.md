@@ -64,3 +64,35 @@ Replace `PASTE_TOKEN_HERE` with your actual token:
 curl -Method GET "http://localhost:5000/api/auth/me" `
   -Headers @{ "Authorization"="Bearer PASTE_TOKEN_HERE" }
 ```
+
+## Option 3: AI Features (Resume & Jobs)
+
+**Note:** By default, the system runs in `AI_MODE=local`. This generates "fake" embeddings locally for free. To use real OpenAI embeddings, set `AI_MODE=openai` in `.env` and provide a valid API Key.
+
+### Prerequisites
+- **Login** first and copy your `token`.
+- Add `Authorization: Bearer <TOKEN>` header to all requests.
+
+### 1. Upload Resume
+- **Method:** `POST`
+- **URL:** `/api/resume/upload`
+- **Body:** `form-data`
+  - Key: `resume` | Type: `File` | Value: Select a PDF or TXT file.
+- **Response:** `{ resumeId: "...", textPreview: "..." }`
+
+### 2. Create Job
+- **Method:** `POST`
+- **URL:** `/api/jobs`
+- **Body (JSON):**
+  ```json
+  {
+    "title": "Software Engineer",
+    "company": "Tech Corp",
+    "description": "Looking for Node.js and React developer."
+  }
+  ```
+
+### 3. Match Resume to Jobs
+- **Method:** `GET`
+- **URL:** `/api/jobs/match?resumeId=<RESUME_ID_FROM_STEP_1>`
+- **Response:** List of jobs sorted by match score.
